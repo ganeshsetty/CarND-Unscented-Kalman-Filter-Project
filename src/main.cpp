@@ -68,6 +68,8 @@ int main(int argc, char* argv[]) {
 
   vector<MeasurementPackage> measurement_pack_list;
   vector<GroundTruthPackage> gt_pack_list;
+  //Added for yaw angle and yaw rate truth values
+  vector<GroundTruthPackage> gt_extend_pack_list;
 
   string line;
 
@@ -77,6 +79,8 @@ int main(int argc, char* argv[]) {
     string sensor_type;
     MeasurementPackage meas_package;
     GroundTruthPackage gt_package;
+    //Added for yaw angle and yaw rate truth values
+    GroundTruthPackage gt_extend_package;
     istringstream iss(line);
     long long timestamp;
 
@@ -120,13 +124,26 @@ int main(int argc, char* argv[]) {
       float y_gt;
       float vx_gt;
       float vy_gt;
+      //Added for yaw angle and yaw rate truth values
+      float yaw_ang_gt;
+      float yaw_rate_gt;
+
       iss >> x_gt;
       iss >> y_gt;
       iss >> vx_gt;
       iss >> vy_gt;
+      //Added for yaw angle and yaw rate truth values
+      iss >> yaw_ang_gt;
+      iss >> yaw_rate_gt;
+
       gt_package.gt_values_ = VectorXd(4);
       gt_package.gt_values_ << x_gt, y_gt, vx_gt, vy_gt;
       gt_pack_list.push_back(gt_package);
+
+      //Added for yaw angle and yaw rate truth values
+      gt_extend_package.gt_values_ = VectorXd(2);
+      gt_extend_package.gt_values_ << yaw_ang_gt,yaw_rate_gt;
+      gt_extend_pack_list.push_back(gt_extend_package);
   }
 
   // Create a UKF instance
@@ -142,20 +159,29 @@ int main(int argc, char* argv[]) {
   size_t number_of_measurements = measurement_pack_list.size();
 
   // column names for output file
-  out_file_ << "time_stamp" << "\t";  
-  out_file_ << "px_state" << "\t";
-  out_file_ << "py_state" << "\t";
-  out_file_ << "v_state" << "\t";
-  out_file_ << "yaw_angle_state" << "\t";
-  out_file_ << "yaw_rate_state" << "\t";
+  //out_file_ << "time_stamp" << "\t";
+  out_file_ << "px_est" << "\t";
+  out_file_ << "py_est" << "\t";
+  out_file_ << "v_est" << "\t";
+  out_file_ << "yaw_ang_est" << "\t";
+  out_file_ << "yaw_rate_est" << "\t";
   out_file_ << "sensor_type" << "\t";
   out_file_ << "NIS" << "\t";  
-  out_file_ << "px_measured" << "\t";
-  out_file_ << "py_measured" << "\t";
-  out_file_ << "px_ground_truth" << "\t";
-  out_file_ << "py_ground_truth" << "\t";
-  out_file_ << "vx_ground_truth" << "\t";
-  out_file_ << "vy_ground_truth" << "\n";
+  out_file_ << "px_meas" << "\t";
+  out_file_ << "py_meas" << "\t";
+  out_file_ << "px_gt" << "\t";
+  out_file_ << "py_gt" << "\t";
+  out_file_ << "vx_gt" << "\t";
+  //out_file_ << "vy_ground_truth" << "\n";
+  out_file_ << "vy_gt" << "\t";
+
+  //extended for yaw_ang_gt and yaw_rate_gt
+  out_file_ << "yaw_ang_gt" << "\t";
+  out_file_ << "yaw_rate_gt" << "\t";
+
+  //extended for NIS_laser and NIS_radar
+  out_file_ << "NIS_laser" << "\t";
+  out_file_ << "NIS_radar" << "\n";
 
 
   for (size_t k = 0; k < number_of_measurements; ++k) {
@@ -163,7 +189,7 @@ int main(int argc, char* argv[]) {
     ukf.ProcessMeasurement(measurement_pack_list[k]);
 
     // timestamp
-    out_file_ << measurement_pack_list[k].timestamp_ << "\t"; // pos1 - est
+    //out_file_ << measurement_pack_list[k].timestamp_ << "\t"; // pos1 - est
 
     // output the state vector
     out_file_ << ukf.x_(0) << "\t"; // pos1 - est
@@ -202,7 +228,18 @@ int main(int argc, char* argv[]) {
     out_file_ << gt_pack_list[k].gt_values_(0) << "\t";
     out_file_ << gt_pack_list[k].gt_values_(1) << "\t";
     out_file_ << gt_pack_list[k].gt_values_(2) << "\t";
-    out_file_ << gt_pack_list[k].gt_values_(3) << "\n";
+    //out_file_ << gt_pack_list[k].gt_values_(3) << "\n";
+    out_file_ << gt_pack_list[k].gt_values_(3) << "\t";
+
+    //Added for yaw angle and yaw rate truth values
+    out_file_ << gt_extend_pack_list[k].gt_values_(0) << "\t";
+    out_file_ << gt_extend_pack_list[k].gt_values_(1) << "\t";
+
+    // NIS laser value
+    out_file_ << ukf.NIS_laser_ << "\t";
+
+    // NIS radar value
+    out_file_ << ukf.NIS_radar_ << "\n";
 
     // convert ukf x vector to cartesian to compare to ground truth
     VectorXd ukf_x_cartesian_ = VectorXd(4);
