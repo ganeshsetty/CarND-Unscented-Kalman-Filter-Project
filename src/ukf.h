@@ -74,6 +74,12 @@ public:
   ///* the current NIS for laser
   double NIS_laser_;
 
+  ///* Laser measurement noise covariance matrix
+  MatrixXd R_laser_;
+
+  ///* Radar measurement noise covariance matrix
+  MatrixXd R_radar_;
+
   /**
    * Constructor
    */
@@ -83,6 +89,7 @@ public:
    * Destructor
    */
   virtual ~UKF();
+
 
   /**
    * ProcessMeasurement
