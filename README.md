@@ -1,5 +1,8 @@
-# Unscented Kalman Filter Project Starter Code
+# Unscented Kalman Filter Project Solution
+
 Self-Driving Car Engineer Nanodegree Program
+
+This project is second project under Sensor Fusion topic of Term2. The objective of this project is designing Unscented Kalman Filter to estimate the position px, py and velocity vx,vy of the object(bicycle) being tracked by fusing the noisy sensor measurements from LIDAR and RADAR.The implementation is in C++ and uses the starter code provided by udacity(forked).
 
 ---
 
