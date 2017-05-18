@@ -14,17 +14,30 @@ This project is second project under Sensor Fusion topic of Term2. The objective
      - UKF.cpp: Implements the predict function and updation functions(LIDAR standard KF and RADAR Extended KF)
      
 * **data**: Has input data obj_pose-laser-radar-synthetic-input.txt
-* **results**: Has UKF output file obj_pose-laser-radar-UKF-output.txt, logs and plots.
+* **results**: Has UKF output file obj_pose-laser-radar-ukf-output.txt, logs and plots.
      
 ## Results with plots
 
 
-![](./results/UKF_Meas_GT_plot.png)
+![](./results/UKF_Meas_GT.png)
 
 
-To differentiate clearly UKF-estimate line and Ground Truth line plots, only those are plotted as below:
+To differentiate clearly UKF-estimate line and Ground Truth line plots towards the curve, zoomed and plotted as below:
 
-![](./results/UKF_GT_plot.png)
+![](./results/UKF_Meas_GT_Zoom.png)
+
+The Yaw angle and yaw rate estimates are plotted below showing the accuracy in estimation eventhough they are not measured by sensors.
+
+![](./results/UKF_yaw_angle_est.png)
+
+![](./results/UKF_yaw_rate_est.png)
+
+The NIS laser and NIS radar plots are shown below
+
+![](./results/UKF_NIS_laser.png)
+
+![](./results/UKF_NIS_radar.png)
+
 
 The plots are obtained using Sensor Utilities https://github.com/udacity/CarND-Mercedes-SF-Utilities
 
