@@ -11,7 +11,7 @@ This project is second project under Sensor Fusion topic of Term2. The objective
 * **src**: This folder has source code of the project
      - main.cpp : Modified to extend the list of parameters to be outputted to output file like NIS_radar, NIS_laser,yaw_ang_gt and  yaw_rate_gt.
      - tools.cpp : Implements the function for RMSE calculations.
-     - UKF.cpp: Implements the predict function and updation functions(LIDAR standard KF and RADAR Extended KF)
+     - UKF.cpp: Implements the predict function and updation functions for Unscented Kalman Filter fusing the LIDAR and RADAR noisy sensors measurements.
      
 * **data**: Has input data obj_pose-laser-radar-synthetic-input.txt
 * **results**: Has UKF output file obj_pose-laser-radar-ukf-output.txt, logs and plots.
