@@ -144,17 +144,12 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 		}
 
 	    //Initialize P_ state covariance matrix
+	    
 	    P_ << 0.0225,0,0,0,0,
-	    			0,0.0225,0,0,0,
-	    			0,0,1,0,0,
-	    			0,0,0,0.009,0,
-	    			0,0,0,0,0.09;
-
-	    P_ << 0.0225,0,0,0,0,
-	    	    			0,0.0225,0,0,0,
-	    	    			0,0,5.0,0,0,
-	    	    			0,0,0,0.01,0,
-	    	    			0,0,0,0,0.1;
+	    		0,0.0225,0,0,0,
+	    		0,0,5.0,0,0,
+	    		0,0,0,0.01,0,
+	    		0,0,0,0,0.1;
 
 		// set weights
 		double weight_0 = lambda_ / (lambda_ + n_aug_);
