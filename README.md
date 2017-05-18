@@ -52,7 +52,7 @@ The RMSE accuracy obtained as :[px,py,vx,vy] --> [0.0672495, 0.0807008, 0.343781
 
 ## Summary
 
-For the new dataset obj_pose-laser-radar-synthetic-input.txt as input, the RMSE is optimized by tuning the initialization of P state covariance matrix and parallely ensuring conditions NIS for radar and laser.
+For the new dataset obj_pose-laser-radar-synthetic-input.txt as input,tuned the process noise parameters std_a_ and std_yawdd_ to improve RMSE accuracy. Further the RMSE is optimized by tuning the initialization of P state covariance matrix and parallely ensuring conditions for NIS for radar and laser.
 
 
 
