@@ -47,7 +47,7 @@ The RMSE accuracy obtained as :[px,py,vx,vy] --> [0.0672495, 0.0807008, 0.343781
 1. Clone this repo.
 2. Make a build directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make` 
-   * On windows, you may need to run: `cmake .. -G "MinGW Makefiles" && migw32-make`
+   * On windows, you may need to run: `cmake .. -G "MinGW Makefiles" && mingw32-make`
 4. Run it: `./UnscentedKF ../data/obj_pose-laser-radar-synthetic-input.txt obj_pose-laser-radar-ukf-output.txt > logs.log
 
 ## Summary
