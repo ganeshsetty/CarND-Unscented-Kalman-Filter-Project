@@ -55,13 +55,11 @@ The RMSE accuracy obtained as :[px,py,vx,vy] --> [0.0672495, 0.0807008, 0.343781
 For the new dataset obj_pose-laser-radar-synthetic-input.txt as input,tuned the process noise parameters std_a_ and std_yawdd_ to improve RMSE accuracy. Further the RMSE is optimized by tuning the initialization of P state covariance matrix and parallely ensuring conditions for NIS for radar and laser.
 
 By using only laser measurements, the RMSE is [0.0949654, 0.0959804, 0.394245,  0.209651]
-
 By using only radar measurements, the RMSE is [0.145199, 0.212919, 0.361528, 0.218052]
-
 The Px,Py estimations are better using LIDAR than only using RADAR as LIDAR is better in position measurement.
-
 The Vx, Vy estimations are better using RADAR than only using LIDAR as RADAR is better in velocity measurement
 
+Compared with EKF using CV results RMSE [px,py,vx,vy]  --> [0.0935411, 0.0848205, 0.310778, 0.423821], the UKF performs better with CTRV motion model.
 
  
 
